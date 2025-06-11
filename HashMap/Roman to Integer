@@ -1,0 +1,32 @@
+//lc-13
+class Solution {
+    public int romanToInt(String s) {
+        int sum=0;
+        int prev=0;
+        Map<Character,Integer> map=new HashMap<>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+
+        for(int i=s.length()-1;i>=0;i--)
+        {
+            int value=map.get(s.charAt(i));
+            //if value=V and prev=I then VI=6
+            if(value>=prev)
+            {
+                sum+=value;
+            }
+            //if value=I and prev=V then IV=4
+            else
+            {
+                sum-=value;
+            }
+            prev=value;
+        }
+        return sum;
+    }
+}
