@@ -1,0 +1,45 @@
+//lc-200
+class Solution {
+    public int numIslands(char[][] grid) {
+        int r=grid.length;
+        int c=grid[0].length;
+        int count=0;
+        int dir[][]={{1,0},{0,-1},{0,1},{-1,0}};//dlru
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+                if(grid[i][j]=='1')//if land
+                {
+                    count++;
+                    bfs(r,c,grid,i,j,dir);//call for checking neighbors to be land to extend
+                }
+            }
+        }
+        return count;
+    }
+
+    public void bfs(int r,int c,char grid[][],int i,int j,int dir[][])
+    {
+        Queue<int[]> q=new LinkedList<>();//to store indices of land cell
+        q.offer(new int[]{i,j});//add current cell indices to q
+        grid[i][j]='0';//mark current cell as visited(water)
+        while(!q.isEmpty())
+        {
+            int curr[]=q.poll();//get indices of current cell
+            int row=curr[0];//i
+            int col=curr[1];//j
+            for(int k=0;k<dir.length;k++)//explore 4 sides
+            {
+                int newR=row+dir[k][0];
+                int newC=col+dir[k][1];
+                //if neighbor cell within boundary and land
+                if(newR>=0 && newR<r && newC>=0 && newC<c && grid[newR][newC]=='1')
+                {
+                    q.offer(new int[]{newR,newC});//extend land by adding that cell indices to q
+                    grid[newR][newC]='0';//mark as visited(water)
+                }
+            }
+        }
+    }
+}
