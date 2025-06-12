@@ -1,6 +1,7 @@
 public class MergeSortSimple {
 
     // Merge Sort main function
+//divide function
     public static void mergeSort(int[] arr, int left, int right) {
         if (left < right) {
             // Find the middle point
@@ -16,6 +17,7 @@ public class MergeSortSimple {
         }
     }
 
+//conquer function
     // Merge two sorted subarrays
     public static void merge(int[] arr, int left, int mid, int right) {
         // Sizes of two subarrays
