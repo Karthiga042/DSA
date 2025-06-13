@@ -1,0 +1,44 @@
+//gfg
+//Predecessor and Successor
+class Solution {
+    public ArrayList<Node> findPreSuc(Node root, int key) {
+        // code here
+        Node predecessor=null;
+        Node successor=null;
+        
+        //find predecessor ie) largest value < key
+        Node temp=root;
+        while(temp!=null)
+        {
+            if(temp.data<key)
+            {
+                predecessor=temp;//it can be predecessor
+                temp=temp.right;//but still move right to find if there is next big<key
+            }
+            else
+            {
+                temp=temp.left;
+            }
+        }
+        
+        //find successor ie)smallest value>key
+        temp=root;
+        while(temp!=null)
+        {
+            if(temp.data>key) 
+            {
+                successor=temp;//it can be successor
+                temp=temp.left; //but still move left to find if there is next small>key
+            }
+            else
+            {
+                temp=temp.right;
+            }
+        }
+        ArrayList<Node> list=new ArrayList<>();
+        list.add(predecessor!=null?predecessor:null);
+        list.add(successor!=null?successor:null);
+        
+        return list;
+    }
+}
