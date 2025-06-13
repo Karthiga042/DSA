@@ -1,0 +1,41 @@
+//gfg
+//Pair Sum in BST
+class Solution {
+    boolean findTarget(Node root, int target) {
+        // Write your code here
+        //inorder gives ordered list
+        List<Integer> list=new ArrayList<>();
+        inorder(root,list);
+        
+        //two pointers approach
+        int left=0;
+        int right=list.size()-1;
+        while(left<right)
+        {
+            int sum=list.get(left)+list.get(right);
+            if(sum==target)
+            {
+                return true;
+            }
+            else if(sum<target)
+            {
+                left++;
+            }
+            else
+            {
+                right--;
+            }
+        }
+        return false;
+    }
+    void inorder(Node root,List<Integer> list)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        inorder(root.left,list);
+        list.add(root.data);
+        inorder(root.right,list);
+    }
+}
