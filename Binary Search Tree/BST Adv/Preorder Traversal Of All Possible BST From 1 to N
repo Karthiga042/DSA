@@ -1,0 +1,66 @@
+import java.util.*;
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+}
+
+public class TreeCreationAndTraversal {
+
+    // Insert function to create a node
+    public static Node createNode(int value) {
+        Node newNode = new Node();
+        newNode.data = value;
+        newNode.left = null;
+        newNode.right = null;
+        return newNode;
+    }
+
+    // Generate all BSTs from start to end
+    public static List<Node> generateBSTs(int start, int end) {
+        List<Node> trees = new ArrayList<>();
+
+        if (start > end) {
+            trees.add(null);
+            return trees;
+        }
+
+        for (int i = start; i <= end; i++) {
+            List<Node> leftSubtrees = generateBSTs(start, i - 1);
+            List<Node> rightSubtrees = generateBSTs(i + 1, end);
+
+            for (int l = 0; l < leftSubtrees.size(); l++) {
+                for (int r = 0; r < rightSubtrees.size(); r++) {
+                    Node root = createNode(i); // use insert-like logic
+                    root.left = leftSubtrees.get(l);
+                    root.right = rightSubtrees.get(r);
+                    trees.add(root);
+                }
+            }
+        }
+        return trees;
+    }
+
+    public static void preorder(Node root) {
+        if (root == null) return;
+        System.out.print(root.data + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of nodes (n): ");
+        int n = sc.nextInt();
+
+        List<Node> allBSTs = generateBSTs(1, n);
+
+        System.out.println("Preorder traversals of all unique BSTs:");
+        for (int i = 0; i < allBSTs.size(); i++) {
+            System.out.print("Tree " + (i + 1) + ": ");
+            preorder(allBSTs.get(i));
+            System.out.println();
+        }
+    }
+}
