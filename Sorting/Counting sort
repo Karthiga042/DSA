@@ -1,0 +1,55 @@
+public class StableCountingSort {
+    public static void countingSort(int[] arr) {
+        if (arr.length == 0) return;
+
+        // Step 1: Find the maximum value
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        // Step 2: Create and fill frequency count array with size of max+1
+        int[] count = new int[max + 1];
+        for (int i = 0; i < arr.length; i++) {
+            count[arr[i]]++;
+        }
+
+        // Step 3: Modify count[] so that each element at each index
+        // stores the sum of previous counts — gives positions
+        //find prefix sum
+        for (int i = 1; i <= max; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // Step 4: Build the output array (same size as input)
+        // take last value as count[index] from input array
+        //find that count[index]'s value
+        //get value-1 as outputarray[index]
+        //place that last value of inputarray in outputarray[index]
+        //decrement freq count
+        int[] output = new int[arr.length];
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int value = arr[i];
+            output[count[value] - 1] = value;
+            count[value]--;
+        }
+
+        // Step 5: Copy output back to original array
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = output[i];
+        }
+    }
+
+    // Main method to test
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 2, 8, 3, 3, 1};
+        countingSort(arr);
+
+        // Print sorted array
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
