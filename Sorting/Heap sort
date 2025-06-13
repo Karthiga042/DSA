@@ -1,0 +1,65 @@
+public class HeapSort {
+
+    // Main Heap Sort function
+    public static void heapSort(int[] arr) {
+        int n = arr.length;
+
+        // STEP 1: Build Max Heap from the array
+        // only heapify from last non leaf nodes
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(arr, n, i); // Heapify subtree rooted at index i
+        }
+
+        // STEP 2: Extract elements one by one from the heap
+        // Each time, move current root (largest) to the end and reduce heap size
+        for (int i = n - 1; i > 0; i--) {
+            // Swap root (arr[0], max value) with last element (arr[i])
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            // Call heapify on the reduced heap (ignore the sorted part at the end)
+            heapify(arr, i, 0);
+        }
+    }
+
+    // Function to maintain heap property for subtree rooted at index i
+    static void heapify(int[] arr, int n, int i) {
+        int largest = i;           // Assume root is the largest
+        int left = 2 * i + 1;      // Index of left child
+        int right = 2 * i + 2;     // Index of right child
+
+        // If left child exists and is greater than root
+        if (left < n && arr[left] > arr[largest]) {
+            largest = left;
+        }
+
+        // If right child exists and is greater than current largest
+        if (right < n && arr[right] > arr[largest]) {
+            largest = right;
+        }
+
+        // If largest is not the root, swap and continue heapifying
+        if (largest != i) {
+            int temp = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = temp;
+
+            // Recursively heapify the affected subtree
+            heapify(arr, n, largest);
+        }
+    }
+
+    // Main method to test the heap sort
+    public static void main(String[] args) {
+        int[] arr = {4, 10, 3, 5, 1};  // Example input
+
+        heapSort(arr);  // Call heap sort
+
+        // Print the sorted array
+        System.out.print("Sorted array: ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
