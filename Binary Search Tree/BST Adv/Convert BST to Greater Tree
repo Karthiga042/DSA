@@ -1,0 +1,24 @@
+//lc-538
+class Solution {
+    int sum=0;
+    public TreeNode convertBST(TreeNode root) {
+        reverseInorder(root);
+        return root;
+    }
+    //reverse inorder gives in descending largest values
+    public void reverseInorder(TreeNode node)
+    {
+        if(node==null)
+        {
+            return;
+        }
+        reverseInorder(node.right);
+
+        //add values greater than node's value to node's value
+        sum+=node.val;
+        //place that sum as node's new value
+        node.val=sum;
+        
+        reverseInorder(node.left);
+    }
+}
