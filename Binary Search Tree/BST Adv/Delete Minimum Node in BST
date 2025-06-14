@@ -1,0 +1,73 @@
+import java.util.*;
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+}
+
+class Main {
+    
+    // Insert node into BST
+    public static Node insert(Node root, int value) {
+        Node newNode = new Node();
+        newNode.data = value;
+        newNode.left = null;
+        newNode.right = null;
+
+        if (root == null) {
+            return newNode;
+        }
+
+        if (value == root.data) {
+            return root; // Ignore duplicates
+        }
+
+        if (value < root.data) {
+            root.left = insert(root.left, value);
+        } else {
+            root.right = insert(root.right, value);
+        }
+
+        return root;
+    }
+
+    // Inorder Traversal
+    public static void inorder(Node root) {
+        if (root == null) return;
+        inorder(root.left);
+        System.out.print(root.data + " ");
+        inorder(root.right);
+    }
+
+    // Delete minimum node in BST
+    public static Node deleteMinimum(Node root) {
+        if (root == null) return null;
+
+        if (root.left == null) {
+            return root.right; // minimum found
+        }
+
+        root.left = deleteMinimum(root.left); // keep going left
+        return root;
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Node root = null;
+
+        for (int i = 0; i < n; i++) {
+            int value = sc.nextInt();
+            root = insert(root, value);
+        }
+
+        System.out.println("Inorder before deletion:");
+        inorder(root);
+
+        root = deleteMinimum(root); // delete smallest node
+
+        System.out.println("\nInorder after deleting minimum node:");
+        inorder(root);
+    }
+}
