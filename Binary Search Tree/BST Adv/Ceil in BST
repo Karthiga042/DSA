@@ -1,0 +1,27 @@
+//gfg
+//Ceil in BST
+class Tree {
+    int findCeil(Node root, int key) {
+        // code here
+        //ceil is smallest value that is >= key
+        int ceil=-1;
+        while(root!=null)
+        {
+            if(root.data==key)
+            {
+                return root.data;
+            }
+            //it can be ceil but try for smaller ceil that is > key
+            else if(root.data>key)
+            {
+                ceil=root.data;
+                root=root.left;
+            }
+            else
+            {
+                root=root.right;
+            }
+        }
+        return ceil;
+    }
+}
