@@ -1,4 +1,35 @@
 //lc-230
+//iterative (safer for deep tree) but both are optimal
+lass Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> st=new Stack<>();
+        while(root!=null || !st.isEmpty())
+        {
+            //left nodes are smaller in bst so go to leftmost
+            while(root!=null)
+            {
+                st.push(root);
+                root=root.left;
+            }
+
+            //process top node in stack ie) smallest node
+            root=st.pop();
+            k--; //mark as visited
+
+            //if k==0 it is the kth smallest
+            if(k==0)
+            {
+                return root.val;
+            }
+
+            //move to right subtree when left is visited till deeper
+            root=root.right;
+        } 
+        return -1;
+    }
+}
+
+//recursive
 class Solution {
     int count=0;
     int res=-1;
