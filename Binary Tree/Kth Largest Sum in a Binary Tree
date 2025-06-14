@@ -1,0 +1,71 @@
+//lc-2583
+class Solution {
+    public long kthLargestLevelSum(TreeNode root, int k) {
+        //optimal bcoz storing k instead of l
+        Queue<TreeNode> q=new LinkedList<>();
+        PriorityQueue<Long> pq=new PriorityQueue<>();
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            int size=q.size();
+            long levelSum=0;
+            for(int i=0;i<size;i++)
+            {
+                TreeNode curr=q.poll();
+                levelSum+=curr.val;
+                if(curr.left!=null)
+                {
+                    q.add(curr.left);
+                }
+                if(curr.right!=null)
+                {
+                    q.add(curr.right);
+                }
+            }
+            //maintain only top k elements in min heap
+            if(pq.size()<k)
+            {
+                pq.add(levelSum);
+            }
+            else if(levelSum>pq.peek())
+            {
+                pq.poll();
+                pq.add(levelSum);
+            }
+        }
+        while(pq.size()>k)
+        {
+            pq.poll();
+        }
+        return pq.size()<k?-1:pq.peek();
+
+
+        // Queue<TreeNode> q=new LinkedList<>();
+        // PriorityQueue<Long> pq=new PriorityQueue<>(Collections.reverseOrder());
+        // q.add(root);
+        // while(!q.isEmpty())
+        // {
+        //     int size=q.size();
+        //     long levelSum=0;
+        //     for(int i=0;i<size;i++)
+        //     {
+        //         TreeNode curr=q.poll();
+        //         levelSum+=curr.val;
+        //         if(curr.left!=null)
+        //         {
+        //             q.add(curr.left);
+        //         }
+        //         if(curr.right!=null)
+        //         {
+        //             q.add(curr.right);
+        //         }
+        //     }
+        //     pq.add(levelSum);
+        // }
+        // while(--k>0 && !pq.isEmpty())
+        // {
+        //     pq.poll();
+        // }
+        // return pq.isEmpty()?-1:pq.poll();
+    }
+}
