@@ -1,0 +1,44 @@
+//lc-450
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root==null)
+        {
+            return null;
+        }
+        if(key<root.val)
+        {
+            root.left=deleteNode(root.left,key);
+        }
+        else if(key>root.val)
+        {
+            root.right=deleteNode(root.right,key);
+        }
+        else //if key==root.data
+        {
+            if(root.left==null)//if left child null replace root with right child
+            {
+                return root.right;
+            }
+            else if(root.right==null)
+            {
+                return root.left;
+            }
+            else if(root.left==null && root.right==null)
+            {
+                return null;
+            }
+            else //root.left!=null && root.right!=null
+            {
+                //we have to find minimum node in right subtree and replace with root
+                TreeNode min=root.right;
+                while(min.left!=null)//minimum in right subtree is in left
+                {
+                    min=min.left;
+                }
+                root.val=min.val;//replace root val with min val
+                root.right=deleteNode(root.right,min.val);//delete that min val from right subtree
+            }
+        }
+        return root;
+    }
+}
