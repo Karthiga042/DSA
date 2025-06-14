@@ -1,0 +1,107 @@
+import java.util.*;
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+}
+
+public class BSTToDLL {
+
+    static Node head = null; // Head of DLL
+    static Node prev = null; // To keep track of previous node while converting
+
+    // Insert function (your version) to build BST
+    public static Node insert(Node root, int value) {
+        Node newNode = new Node();
+        newNode.data = value;
+        newNode.left = null;
+        newNode.right = null;
+
+        if (root == null) {
+            return newNode;
+        }
+
+        if (value == root.data) {
+            System.out.println("Duplicate value found: " + value);
+            return root;
+        }
+
+        if (value < root.data) {
+            root.left = insert(root.left, value);
+        } else {
+            root.right = insert(root.right, value);
+        }
+
+        return root;
+    }
+
+    // Convert BST to Sorted Doubly Linked List (Inorder traversal)
+    public static void convertToDLL(Node root) {
+        if (root == null)
+            return;
+
+        // Step 1: Convert left subtree
+        convertToDLL(root.left);
+
+        // Step 2: Process current node
+        if (prev == null) {
+            // This is the leftmost node, so it becomes the head of DLL
+            head = root;
+        } else {
+            // Link previous node with current node
+            prev.right = root;
+            root.left = prev;
+        }
+
+        // Move prev to current node
+        prev = root;
+
+        // Step 3: Convert right subtree
+        convertToDLL(root.right);
+    }
+
+    // Display the Doubly Linked List from head to tail
+    public static void printDLL(Node head) {
+        Node temp = head;
+        System.out.println("Doubly Linked List:");
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.right;
+        }
+        System.out.println();
+    }
+
+    // Optional: Inorder traversal for verification
+    public static void inorder(Node root) {
+        if (root == null) return;
+        inorder(root.left);
+        System.out.print(root.data + " ");
+        inorder(root.right);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Build BST
+        System.out.print("Enter number of nodes: ");
+        int n = sc.nextInt();
+        Node root = null;
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter node " + (i + 1) + ": ");
+            int value = sc.nextInt();
+            root = insert(root, value);
+        }
+
+        System.out.println("\nInorder traversal of BST:");
+        inorder(root);
+        System.out.println();
+
+        // Convert BST to DLL
+        convertToDLL(root);
+
+        // Print DLL
+        printDLL(head);
+    }
+}
