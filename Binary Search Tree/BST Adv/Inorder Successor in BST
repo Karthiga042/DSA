@@ -1,0 +1,23 @@
+//gfg
+//Inorder Successor in BST
+class Solution {
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+    public int inorderSuccessor(Node root, Node x) {
+        // add code here.
+        //inorder successor is next greater element of x
+        Node successor=null;
+        while(root!=null)
+        {
+            if(root.data>x.data)
+            {
+                successor=root;//it can be inorder successor
+                root=root.left;//but move left to check if there is next smallest greater
+            }
+            else
+            {
+                root=root.right;
+            }
+        }
+        return successor!=null?successor.data:-1;
+    }
+}
