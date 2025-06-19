@@ -1,0 +1,45 @@
+//asked in desk 365 drive
+public class LongestPalindromeKDeletions {
+
+    public int longestPalindromeSubseq(String s, int k) {
+        int n = s.length();
+
+        // dp[i][j] stores the length of the longest palindromic subsequence
+        int[][] dp = new int[n][n];
+
+        // All substrings of length 1 are palindromes of length 1
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = 1;
+        }
+
+        // Check all substring lengths from 2 to n
+        for (int length = 2; length <= n; length++) {
+            // Start index of substring
+            for (int i = 0; i <= n - length; i++) {
+                int j = i + length - 1; // End index of substring
+
+                if (s.charAt(i) == s.charAt(j)) {
+                    // If both characters match, extend the palindrome
+                    //Add 2 (for the matching i and j characters)
+                    //Add the LPS of the middle substring, which is s[i+1...j-1]
+                    dp[i][j] = 2 + dp[i + 1][j - 1];
+                } else {
+                    // Else take the max from skipping either char left or down
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        // Length of longest palindromic subsequence
+        int lps = dp[0][n - 1];
+
+        // To make string palindrome, we can delete up to (n - lps) characters
+        //(n-lps) are the characters we need to remove (delete) to make the string a palindrome]
+        //Characters to delete = Total length - LPS length
+        if (n - lps <= k) {
+            return lps; // Can become a palindrome with ≤ k deletions
+        } else {
+            return -1;  // Not possible within k deletions
+        }
+    }
+}
