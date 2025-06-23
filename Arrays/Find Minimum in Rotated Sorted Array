@@ -1,0 +1,22 @@
+//lc-153
+class Solution {
+    public int findMin(int[] nums) {
+        // Arrays.sort(nums);
+        // return nums[0];
+        int l=0;
+        int r=nums.length-1;
+        while(l<r)
+        {
+            int mid=l+(r-l)/2;
+            if(nums[mid]>nums[r])//if the mid element is greater than element on right side then the minimum element must be found right side of mid
+            {
+                l=mid+1;
+            }
+            else//found in left side of mid or may be mid
+            {
+                r=mid;
+            }
+        }
+        return nums[l];//when l==r it founds min //nums[r] can also be written
+    }
+}
