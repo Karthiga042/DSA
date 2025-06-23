@@ -1,0 +1,23 @@
+//lc-189
+class Solution {
+    void reverse(int s,int e,int arr[])
+    {
+        while(s<e)
+        {
+            int temp=arr[s];
+            arr[s]=arr[e];
+            arr[e]=temp;
+            s++;
+            e--;
+        }
+    }
+    public void rotate(int[] nums, int k) {
+        int n=nums.length;
+        k%=nums.length;
+        reverse(0,n-1,nums);
+        reverse(0,k-1,nums);
+        reverse(k,n-1,nums);
+    }
+}
+//If n= 5 and k = 7, then k %= 5 results in k = 2, because rotating by 7 positions is the same as rotating by 2 positions.
+// k %= nums.length is used to handle cases where k is larger than n
