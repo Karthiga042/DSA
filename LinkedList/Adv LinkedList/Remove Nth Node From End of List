@@ -1,0 +1,29 @@
+//lc-19
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode temp=head;
+        int count=0;
+        while(temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        int index=count-n;
+        if(index==0)
+        {
+            ListNode del=head;
+            head=head.next;
+            // del=null;
+            return head;
+        }
+        temp=head;
+        for(int i=0;i<index-1;i++)
+        {
+            temp=temp.next;
+        }
+        ListNode deleteNode=temp.next;
+        temp.next=temp.next.next;
+        // deleteNode=null;
+        return head;
+    }
+}
