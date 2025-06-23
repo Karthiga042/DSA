@@ -1,0 +1,46 @@
+//lc-35
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int s=0;
+        int e=nums.length-1;
+        while(s<=e)
+        {
+            int mid=s+(e-s)/2;
+            if(nums[mid]==target)
+            {
+                return mid;
+            }
+            else if(nums[mid]>target)
+            {
+                e=mid-1;
+            }
+            else
+            {
+                s=mid+1;
+            }
+        }
+        return s; // If target is not found, s will point to the correct insert position
+
+        // int n=nums.length;
+        // if(target<nums[0])
+        // {
+        //     return 0;
+        // }
+        // if(target>nums[n-1])
+        // {
+        //     return n;
+        // }
+        // for(int i=0;i<nums.length;i++)
+        // {
+        //     if(nums[i]==target)
+        //     {
+        //         return i;//target equals value return index position
+        //     }
+        //     else if(i!=n-1 && target>nums[i] && target<nums[i+1])
+        //     {
+        //         return i+1;
+        //     }
+        // }
+        // return -1;
+    }
+}
