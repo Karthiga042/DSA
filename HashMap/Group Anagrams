@@ -1,0 +1,22 @@
+//lc-49
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        int n=strs.length;
+        Map<String,List<String>> map=new HashMap<>();//sorted string,list of its anagrams
+        for(int i=0;i<n;i++) 
+        {
+            char[] arr=strs[i].toCharArray(); 
+            Arrays.sort(arr);
+            String word= new String(arr); // Convert sorted characters back to a string
+
+            //Check if this sorted string is already a key in the map
+            if (!map.containsKey(word)) 
+            {
+                map.put(word,new ArrayList<>()); //If not,add it as a new key with an empty list
+            }
+            //Add the original woed to the list of anagrams for the sorted key
+            map.get(word).add(strs[i]);
+        }
+        return new ArrayList<>(map.values()); //Return all the lists of anagrams
+    }
+}
