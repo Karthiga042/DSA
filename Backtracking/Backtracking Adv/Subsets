@@ -1,0 +1,28 @@
+//lc-78
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list=new ArrayList<>();
+        ArrayList<Integer> subset=new ArrayList<>();
+        subsetGen(nums,0,subset,list);
+        return list;
+    }
+    public void subsetGen(int nums[],int index,List<Integer> subset,List<List<Integer>> list)
+    {
+        if(index==nums.length)
+        {
+            list.add(new ArrayList<>(subset));
+        }
+        else
+        {
+            subset.add(nums[index]);
+            //recurse with element included
+            subsetGen(nums,index+1,subset,list);
+
+            //backtrack
+            subset.remove(subset.size()-1);
+
+            //recurse with element excluded
+            subsetGen(nums,index+1,subset,list);
+        }
+    }
+}
