@@ -1,0 +1,21 @@
+//lc-14
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        StringBuilder sb=new StringBuilder();
+        //take first word and check if the characters of other words match
+        for(int i=0;i<strs[0].length();i++)
+        {
+            char ch=strs[0].charAt(i);
+            for(int j=1;j<strs.length;j++)
+            {
+                //if first word exceeds length or not matches
+                if(i>=strs[j].length() || ch!=strs[j].charAt(i))
+                {
+                    return sb.toString();
+                }
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+}
