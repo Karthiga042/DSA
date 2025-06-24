@@ -1,0 +1,83 @@
+//lc-5
+class Solution {
+    public String expandFromCentre(String s,int left,int right)
+    {
+        while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right))
+        {
+            left--;
+            right++;
+        }
+        return s.substring(left+1,right);//left ends at -1
+    }
+    public String longestPalindrome(String s) {
+        String longest="";
+        for(int i=0;i<s.length();i++)
+        {
+            String odd=expandFromCentre(s,i,i); //odd len palindrome centre is i
+            if(odd.length()>longest.length())
+            {
+                longest=odd;
+            }
+            String even=expandFromCentre(s,i,i+1); //even len palindrome centre is b/w i and i+1
+             if(even.length()>longest.length())
+            {
+                longest=even;
+            }
+        }
+        return longest;
+
+
+    ////finding len
+    // public int expandFromCentre(String s,int left,int right)
+    // {
+    //     while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right))
+    //     {
+    //         left--;
+    //         right++;
+    //     }
+    //     return right-left-1;
+    //     //substring is between left+1 and right-1 
+    //     //so right-1-(left+1)+1 = right-left+1
+    // }
+    // public String longestPalindrome(String s) {
+    //     if(s==null || s.length()<1)
+    //     {
+    //         return "";
+    //     }
+    //     int maxLen=Integer.MIN_VALUE;
+    //     for(int i=0;i<s.length();i++)
+    //     {
+    //         int len1=expandFromCentre(s,i,i); //odd len palindrome centre is i
+    //         int len2=expandFromCentre(s,i,i+1); //even len palindrome centre is b/w i and i+1
+    //         int len=Math.max(len1,len2);
+    //         maxLen=Math.max(maxLen,len);
+    //     }
+    //     return maxlen;
+        
+        //tle
+        // int max=Integer.MIN_VALUE;
+        // String longString="";
+        // if(s.length()==1)
+        // {
+        //     return s;
+        // }
+        // for(int i=0;i<s.length();i++)
+        // {
+        //     for(int j=i;j<s.length();j++)
+        //     {
+        //         String ss=s.substring(i,j+1);
+        //         StringBuilder sb=new StringBuilder(ss);
+        //         String rev=sb.reverse().toString();
+        //         if(ss.equals(rev))
+        //         {
+        //             if(max<ss.length())
+        //             {
+        //                 max=ss.length();
+        //                 longString=ss;
+        //             }
+        //         }
+        //     }
+        // }
+        // return longString;
+    }
+}
