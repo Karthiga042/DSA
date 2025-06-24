@@ -1,0 +1,30 @@
+//lc-46
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> list=new ArrayList<>();
+        List<Integer> p=new ArrayList<>();
+        permutation(nums,p,list);
+        return list;
+    }
+
+    public void permutation(int nums[],List<Integer> p,List<List<Integer>>list)
+    {
+        if(p.size()==nums.length)//one permutation created
+        {
+            list.add(new ArrayList<>(p));//add to list of permutations
+            return;
+        }
+        for(int i=0;i<nums.length;i++)
+        {
+            if(p.contains(nums[i]))
+            {
+                continue;
+            }
+            p.add(nums[i]);
+            // Recurse with the updated permutation
+            permutation(nums,p,list);
+            // Backtrack: remove the last added number and try the next one
+            p.remove(p.size()-1);
+        }
+    }
+}
