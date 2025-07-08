@@ -1,0 +1,95 @@
+//asked in Trimble
+//Problem Title: Count Types of Boats in a Sea Grid
+//You are given a 2D grid representing a sea area. The grid contains two types of cells:
+//'#' represents a part of a boat.
+//'.' represents water.
+//A boat is defined as a connected group of '#' cells. Two cells are considered connected if they are adjacent horizontally or vertically (not diagonally).
+//There are 3 types of boats:
+//Patrol Boat – occupies 1 cell
+//Submarine – occupies 2 connected cells
+//Destroyer – occupies 3 connected cells
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        String[] input = {
+            ".##.#",
+            "#.#..",
+            "#...#",
+            "#.##."
+        };
+        int[] result = countBoats(input);
+        System.out.println("Parol: " + result[0]);
+        System.out.println("Submarine: " + result[1]);
+        System.out.println("Destroyer: " + result[2]);
+        System.out.println("Result Array: " + Arrays.toString(result));
+    }
+    public static int[] countBoats(String `input[])
+    {
+        int rows=input.length;
+        int cols=input[0].length();
+        char grid[][]=new char[rows][cols];
+        for(int i=0;i<rows;i++)
+        {
+            grid[i]=input[i].toCharArray();
+        }
+        boolean visited[][]=new boolean[rows][cols];
+        int patrol=0,submarine=0,destroyer=0;
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<cols;j++)
+            {
+                if(grid[i][j]=='#' && !visited[i][j])
+                {
+                    int size=bfs(grid,visited,i,j);
+                    if(size==1)
+                    {
+                        patrol++;
+                    }
+                    else if(size==2)
+                    {
+                        submarine++;
+                    }
+                    else if(size==3)
+                    {
+                        destroyer++;
+                    }
+                }
+            }
+        }
+        return new int[]{patrol,submarine,destroyer};
+    }
+    public static int bfs(char grid[][],boolean visited[][],int sr,int sc)
+    {
+        int n=grid.length;
+        int m=grid[0].length;
+        int dir[][]={{-1,0},{0,-1},{1,0},{0,1}};
+        Queue<int[]> q=new LinkedList<>();
+        if(!visited[sr][sc])
+        {
+            q.offer(new int[]{sr,sc});
+            visited[sr][sc]=true;
+        }
+        int size=0;
+        while(!q.isEmpty())
+        {
+            int curr[]=q.poll();
+            int r=curr[0];
+            int c=curr[1];
+            size++;
+            for(int i=0;i<dir.length;i++)
+            {
+                int nr=r+dir[i][0];
+                int nc=c+dir[i][1];
+                if(nr>=0 && nr<n && nc>=0 && nc<m && !visited[nr][nc] && grid[nr][nc]=='#')
+                {
+                    q.offer(new int[]{nr,nc});
+                    visited[nr][nc]=true;
+                }
+            }
+        }
+        return size;
+    }
+}
