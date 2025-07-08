@@ -1,0 +1,95 @@
+// Problem Title: Cars Crossing a Weight-Constrained Bridge
+// Problem Statement:
+// You are given a queue of cars waiting to cross a bridge. Each car has a weight, and the bridge has the following constraints:
+// At most 2 cars can be on the bridge at a time.
+// The total weight of the cars on the bridge must not exceed a given maxWeight.
+// Cars must cross the bridge in the order they arrive.
+// When a car leaves the bridge, the next car in the queue must attempt to enter the bridge:
+// If the current car on the bridge and the next waiting car together exceed the weight limit, the waiting car is permanently turned back (removed).
+// Then, the next car in the queue (after the rejected one) is considered for pairing with the current car on the bridge.
+// If no car is on the bridge, a single car from the queue may enter if its weight ≤ maxWeight.
+// Cars that are too heavy alone (i.e., their weight > maxWeight) are immediately turned back.
+// Your task is to simulate the process and return the minimum number of cars that must be turned back to allow all other cars to cross safely in order.
+
+// Input:
+// weights = [5, 3, 8, 1, 8, 7, 7, 6]
+// maxWeight = 9
+
+// Output:
+// 4
+
+// ✅ Explanation:
+// [5, 3] enter → OK → 5 leaves
+// Try to pair 3 with 8 → too heavy → turn back 8
+// Pair 3 with 1 → OK → 3 leaves
+// Try to pair 1 with 8 → OK → 1 leaves
+// Try to pair 8 with 7 → too heavy → turn back 7
+// Try to pair 8 with next 7 → too heavy → turn back 7
+// 8 leaves
+// 6 enters alone → OK
+// Cars turned back: 8 (first), 7, 7, 8 (second) → Total: 4
+
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] weights = {5, 3, 8, 1, 8, 7, 7, 6};
+        int maxWeight = 9;
+        int result = countCarsTurnedBack(weights, maxWeight);
+        System.out.println("Cars turned back: " + result); // Expected: 4
+    }
+
+    public static int countCarsTurnedBack(int[] weights, int maxWeight) {
+        Queue<Integer> bridge = new LinkedList<>();
+        int i = 0;
+        int n = weights.length;
+        int turnedBack = 0;
+
+        while (i < n || !bridge.isEmpty()) {
+
+            // If bridge is empty, try to add the next car
+            if (bridge.isEmpty()) {
+                if (weights[i] <= maxWeight) {
+                    bridge.offer(weights[i]);
+                } else {
+                    turnedBack++; // Car too heavy alone
+                }
+                i++;
+            }
+
+            // If one car is on the bridge, try to pair it with next waiting cars
+            else if (bridge.size() == 1) {
+                int current = bridge.peek();
+
+                boolean paired = false;
+                while (i < n) {
+                    int next = weights[i];
+
+                    // Try pairing current + next
+                    if (current + next <= maxWeight) {
+                        bridge.offer(next);
+                        i++;
+                        paired = true;
+                        break;
+                    } else {
+                        turnedBack++; // Cannot pair → turn back this car
+                        i++; // Move to next car
+                    }
+                }
+
+                // If no pair found, the current car leaves
+                if (!paired) {
+                    bridge.poll();
+                }
+            }
+
+            // If two cars are on the bridge, remove one
+            else if (bridge.size() == 2) {
+                bridge.poll(); // first car leaves
+            }
+        }
+
+        return turnedBack;
+    }
+}
