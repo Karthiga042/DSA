@@ -1,0 +1,103 @@
+//if you can pic element only once
+import java.util.*;
+public class Main
+{
+    public static int knapsack(int cost[],int wt[],int n,int cap,int dp[][])
+    {
+        int ans=0;
+        if(cap==0 || n==0)
+        {
+            return 0;
+        }
+        if(dp[n][cap]!=-1)
+        {
+            return dp[n][cap];
+        }
+        int pick=0;
+        if(wt[n-1]<=cap)
+        {
+            pick=cost[n-1]+knapsack(cost,wt,n-1,cap-wt[n-1],dp);
+        }
+        int notpick=0+knapsack(cost,wt,n-1,cap,dp);
+        ans=Math.max(pick,notpick);
+        dp[n][cap]=ans;
+        return ans;
+    }
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int cost[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+		    cost[i]=sc.nextInt();
+		}
+		int wt[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+		    wt[i]=sc.nextInt();
+		}
+		int cap=sc.nextInt();
+		int dp[][]=new int[n+1][cap+1];
+		for(int i=0;i<n+1;i++)
+		{
+		    for(int j=0;j<cap+1;j++)
+		    {
+		        dp[i][j]=-1;
+		    }
+		}
+		int res=knapsack(cost,wt,n,cap,dp);
+		System.out.println(res);
+	}
+}
+
+//if you can pick element more than once
+import java.util.*;
+public class Main
+{
+    public static int knapsack(int cost[],int wt[],int n,int cap,int dp[][])
+    {
+        int ans=0;
+        if(cap==0 || n==0)
+        {
+            return 0;
+        }
+        if(dp[n][cap]!=-1)
+        {
+            return dp[n][cap];
+        }
+        int pick=0;
+        if(wt[n-1]<=cap)
+        {
+            pick=cost[n-1]+knapsack(cost,wt,n,cap-wt[n-1],dp);
+        }
+        int notpick=0+knapsack(cost,wt,n-1,cap,dp);
+        ans=Math.max(pick,notpick);
+        dp[n][cap]=ans;
+        return ans;
+    }
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int cost[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+		    cost[i]=sc.nextInt();
+		}
+		int wt[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+		    wt[i]=sc.nextInt();
+		}
+		int cap=sc.nextInt();
+		int dp[][]=new int[n+1][cap+1];
+		for(int i=0;i<n+1;i++)
+		{
+		    for(int j=0;j<cap+1;j++)
+		    {
+		        dp[i][j]=-1;
+		    }
+		}
+		int res=knapsack(cost,wt,n,cap,dp);
+		System.out.println(res);
+	}
+}
