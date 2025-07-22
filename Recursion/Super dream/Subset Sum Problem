@@ -1,0 +1,74 @@
+import java.util.*;
+public class Main
+{
+    public static boolean subset(int arr[],int target,int n,int sum)
+    {
+        if(sum==target)
+        {
+            return true;
+        }
+        if(sum>target || n==0)
+        {
+            return false;
+        }
+        boolean pick=subset(arr,target,n-1,sum+arr[n-1]);
+        boolean notpick=subset(arr,target,n-1,sum);
+        return (pick || notpick);
+    }
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+		    arr[i]=sc.nextInt();
+		}
+		int target=sc.nextInt();
+		if(subset(arr,target,n,0))
+		{
+		    System.out.println("Subset");
+		}
+		else 
+		{
+		    System.out.println("Not subset");
+		}
+	}
+}
+
+----or----
+import java.util.*;
+public class Main
+{
+    public static boolean subset(int arr[],int target,int n)
+    {
+        if(target==0 || n==0)
+        {
+            return target==0?true:false;
+        }
+        boolean pick=false;
+        if(arr[n-1]<=target)
+        {
+            pick=subset(arr,target-arr[n-1],n-1);
+        }
+        boolean notpick=subset(arr,target,n-1);
+        return (pick || notpick);
+    }
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+		    arr[i]=sc.nextInt();
+		}
+		int target=sc.nextInt();
+		if(subset(arr,target,n))
+		{
+		    System.out.println("Subset");
+		}
+		else 
+		{
+		    System.out.println("Not subset");
+		}
+	}
+}
