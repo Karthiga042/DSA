@@ -1,0 +1,70 @@
+public class Main {
+    public static void main(String[] args) {
+        String str = "HELLOZIGZAG";
+        int rows = 3;
+
+        String finalZigzag = printAndConvertZigzag(str, rows);
+        System.out.println("\nFinal Zigzag String: " + finalZigzag);
+    }
+
+    public static String printAndConvertZigzag(String str, int numRows) {
+        if (numRows == 1) {
+            System.out.println(str);
+            return str;
+        }
+
+        int n = str.length();
+        char[][] zigzag = new char[numRows][n];
+
+        // Fill matrix with spaces
+        for (int i = 0; i < numRows; i++)
+            for (int j = 0; j < n; j++)
+                zigzag[i][j] = ' ';
+
+        int row = 0, col = 0;
+        boolean goingDown = true;
+
+        for (int i = 0; i < n; i++) {
+            zigzag[row][col] = str.charAt(i);
+
+            if (goingDown) {
+                if (row < numRows - 1) {
+                    row++;
+                } else {
+                    row--;
+                    col++;
+                    goingDown = false;
+                }
+            } else {
+                if (row > 0) {
+                    row--;
+                    col++;
+                } else {
+                    row++;
+                    goingDown = true;
+                }
+            }
+        }
+
+        // Print visual zigzag
+        System.out.println("Visual Zigzag Pattern:");
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(zigzag[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+        // Build final zigzag string row-wise
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < n; j++) {
+                if (zigzag[i][j] != ' ') {
+                    result.append(zigzag[i][j]);
+                }
+            }
+        }
+
+        return result.toString();
+    }
+}
