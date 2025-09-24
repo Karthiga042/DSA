@@ -1,0 +1,100 @@
+//asked in zoho
+//higher prime factors set count comes first
+//if counts equal,number with highest digit sum comes first
+//if both are equal, maintain original relative order
+
+package zoho;
+import java.util.*;
+
+public class SortArray {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        sc.close();
+
+        int pf[] = new int[n]; // prime factor counts
+        int ds[] = new int[n]; // digit sums
+
+        for (int i = 0; i < n; i++) {
+            pf[i] = primeFactors(arr[i]);
+            ds[i] = digitSum(arr[i]);
+        }
+
+        // sort according to rules
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (pf[i] < pf[j]) {
+                    swap(arr, pf, ds, i, j);
+                } else if (pf[i] == pf[j]) {
+                    if (ds[i] < ds[j]) {
+                        swap(arr, pf, ds, i, j);
+                    }
+                    // if both equal → keep order (stable)
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static void swap(int arr[], int pf[], int ds[], int i, int j) {
+        int t1 = arr[i]; arr[i] = arr[j]; arr[j] = t1;
+        int t2 = pf[i]; pf[i] = pf[j]; pf[j] = t2;
+        int t3 = ds[i]; ds[i] = ds[j]; ds[j] = t3;
+    }
+
+    // digit sum
+    public static int digitSum(int x) {
+        int sum = 0;
+        while (x > 0) {
+            sum += x % 10;
+            x /= 10;
+        }
+        return sum;
+    }
+
+    // count distinct prime factors using isPrime()
+    public static int primeFactors(int p) {
+        int count = 0;
+        for (int i = 2; i <= p; i++) {
+            if (isPrime(i) && p % i == 0) {
+                count++;
+                while (p % i == 0) {
+                    p /= i; // divide out all factors of i
+                }
+            }
+        }
+        return count;
+    }
+
+public static int primeFactors(int p)
+//	{
+//		List<Integer> list=new ArrayList<>();
+//		for(int i=1;i<=p;i++)
+//		{
+//			if(isPrime(i))
+//			{
+//				if(p%i==0)
+//				{
+//					list.add(i);
+//				}
+//			}
+//		}
+//		return list.size();
+//	}
+
+    // check prime
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+}
