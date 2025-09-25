@@ -1,22 +1,32 @@
 //lc-53
 class Solution {
     public int maxSubArray(int[] nums) {
-        //kadane's algorithm
-        int max=Integer.MIN_VALUE;
-        int sum=0;
-        for(int i=0;i<nums.length;i++)
+        //kadane's formula version
+        int max=nums[0];
+        int currMax=nums[0];
+        for(int i=1;i<nums.length;i++)
         {
-            if(sum>=0)
-            {
-                sum+=nums[i];
-            }
-            else
-            {
-                sum=nums[i];
-            }
-            max=Math.max(max,sum);
+            currMax=Math.max(nums[i],currMax+nums[i]);
+            max=Math.max(max,currMax);
         }
         return max;
+
+        // //kadane's algorithm
+        // int max=Integer.MIN_VALUE;
+        // int sum=0;
+        // for(int i=0;i<nums.length;i++)
+        // {
+        //     if(sum>=0)
+        //     {
+        //         sum+=nums[i];
+        //     }
+        //     else
+        //     {
+        //         sum=nums[i];
+        //     }
+        //     max=Math.max(max,sum);
+        // }
+        // return max;
 
         // int max=Integer.MIN_VALUE;
         // int sum=0;
