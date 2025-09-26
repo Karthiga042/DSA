@@ -1,0 +1,56 @@
+//asked in zoho
+//print string and length
+//longest substring without repeating characters
+
+import java.util.*;
+
+public class Second {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String str = s.nextLine();
+        
+        HashSet<Character> set = new HashSet<>();
+        int l = 0, maxLen = 0, startIndex = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            while (set.contains(str.charAt(i))) {
+                set.remove(str.charAt(l));
+                l++;
+            }
+            set.add(str.charAt(i));
+
+            if (i - l + 1 > maxLen) {
+                maxLen = i - l + 1;
+                startIndex = l; // remember where this best substring started
+            }
+        }
+
+        // Print both length and substring
+        System.out.println("Length: " + maxLen);
+        System.out.println("Substring: " + str.substring(startIndex, startIndex + maxLen));
+    }
+}
+
+
+//print only length
+import java.util.*;
+
+public class second {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        String str=s.nextLine();
+        HashSet<Character>set=new HashSet<>();
+        int l=0,maxLen=0;
+        for(int i=0;i<str.length();i++)
+        {
+            while(set.contains(str.charAt(i)))
+            {
+                set.remove(str.charAt(l));
+                l++;
+            }
+            set.add(str.charAt(i));
+            maxLen=Math.max(maxLen, i-l+1);
+        }
+        System.out.print(maxLen);
+    }
+}
