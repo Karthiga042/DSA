@@ -1,0 +1,898 @@
+Rectangle pattern:
+-------------------
+
+* * * *
+* * * *
+* * * *
+* * * *
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(i==1 || i==n || j==1 || j==n)
+                System.out.print("*");
+                else
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Hollow Rectangle pattern:
+-------------------------
+
+****
+*  *
+*  *
+*  *
+****
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Half-pyramid pattern:
+-----------------------
+
+*
+* *
+* * *
+* * * *
+* * * * *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Inverted half-pyramid:
+-------------------------
+
+* * * * *
+* * * *
+* * *
+* *
+*
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        // for(int i=n;i>=1;i--)
+        // {
+        //     for(int j=1;j<i;j++)
+        //     {
+        //         System.out.print(" ");
+        //     }
+        //     for(int j=i;j<=n;j++)
+        //     {
+        //         System.out.print("*");
+        //     }
+        //     System.out.println();
+        // }
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(j<i)
+                {
+                    System.out.print(" ");
+                }
+                else 
+                {
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Half-pyramid after 180 rotation:
+----------------------------------
+
+    *
+   **
+  ***
+ ****
+*****
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        // for(int i=1;i<=n;i++)
+        // {
+        //     for(int j=1;j<i;j++)
+        //     {
+        //         System.out.print(" ");
+        //     }
+        //     for(int j=i;j<=n;j++)
+        //     {
+        //         System.out.print("*");
+        //     }
+        //     System.out.println();
+        // }
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(j<i)
+                {
+                    System.out.print(" ");
+                }
+                else 
+                {
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+
+Inverted half-pyramid after 180 rotation:
+-------------------------------------------
+
+*****
+ ****
+  ***
+   **
+    *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Pyramid pattern:
+-------------------
+
+    *
+   * *
+  * * *
+ * * * *
+* * * * *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+Inverted pyramid pattern:
+--------------------------
+
+* * * * *
+ * * * *
+  * * *
+   * *
+    *
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Hollow pyramid pattern:
+-------------------------
+
+    *
+   * *
+  *   *
+ *     *
+* * * * *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                if(i==1 || i==n || i==j || j==1)
+                System.out.print("* ");
+                else 
+                System.out.print("  ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Inverted hollow pyramid pattern:
+--------------------------------
+
+* * * * *
+ *     *
+  *   *
+   * *
+    *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                if(i==1 || i==n || i==j || j==1)
+                System.out.print("* ");
+                else 
+                System.out.print("  ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Rhombus pattern:
+-----------------
+
+    *****
+   *****
+  *****
+ *****
+*****
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=n;j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Hollow Rhombus pattern:
+-----------------------
+
+    *****
+   *   *
+  *   *
+ *   *
+*****
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=n;j++)
+            {
+                if(i==1 || i==n || j==1 || j==n)
+                System.out.print("*");
+                else 
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Diamond pattern:
+------------------
+
+    *
+   * *
+  * * *
+ * * * *
+* * * * *
+* * * * *
+ * * * *
+  * * *
+   * *
+    *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Hollow diamond:
+---------------
+
+    *
+   * *
+  *   *
+ *     *
+*       *
+*       *
+ *     *
+  *   *
+   * *
+    *
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                if(i==1 || j==1 || i==j)
+                System.out.print("* ");
+                else 
+                System.out.print("  ");
+            }
+            System.out.println();
+        }
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                if(i==1 || j==1 || i==j)
+                System.out.print("* ");
+                else 
+                System.out.print("  ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Hollow diamond inscribed in a rectangle pattern:
+-----------------------------------------------------
+
+*********
+**** ****
+***   ***
+**     **
+*       *
+**     **
+***   ***
+**** ****
+*********
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i+1;j++)
+            {
+                System.out.print("*");
+            }
+            for(int j=1;j<i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=n;j++)
+            {
+                if(j<i)
+                System.out.print(" ");
+                else 
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for(int i=n-1;i>=1;i--)
+        {
+            for(int j=1;j<=n-i+1;j++)
+            {
+                System.out.print("*");
+            }
+            for(int j=1;j<i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=n;j++)
+            {
+                if(j<i)
+                System.out.print(" ");
+                else 
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+Hour glass pattern:
+-------------------
+
+* * * * *
+ * * * *
+  * * *
+   * *
+    *
+   * *
+  * * *
+ * * * *
+* * * * *
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=n;i>1;i--)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+diagonal or x-pattern:
+------------------------
+
+*       *
+ *     *
+  *   *
+   * *
+    *
+   * *
+  *   *
+ *     *
+*       *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int size=2*n-1;
+        for(int i=1;i<=size;i++)
+        {
+            for(int j=1;j<=size;j++)
+            {
+                if(i==j || i+j==size+1)
+                System.out.print("*");
+                else 
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+// import java.util.*;
+// class Main 
+// {
+//     public static void main(String args[])
+//     {
+//         Scanner sc=new Scanner(System.in);
+//         int n=sc.nextInt();
+//         for(int i=n;i>1;i--)
+//         {
+//             for(int j=1;j<=n-i;j++)
+//             {
+//                 System.out.print(" ");
+//             }
+//             for(int j=1;j<=i;j++)
+//             {
+//                 if(i==1 ||j==1 || i==j)
+//                 System.out.print("* ");
+//                 else 
+//                 System.out.print("  ");
+//             }
+//             System.out.println();
+//         }
+//         for(int i=1;i<=n;i++)
+//         {
+//             for(int j=1;j<=n-i;j++)
+//             {
+//                 System.out.print(" ");
+//             }
+//             for(int j=1;j<=i;j++)
+//             {
+//                 if(i==1 ||j==1 || i==j)
+//                 System.out.print("* ");
+//                 else 
+//                 System.out.print("  ");
+//             }
+//             System.out.println();
+//         }
+//     }
+// }
+
+
+zig-zag pattern:
+------------------
+
+   *     *
+  *  * *  *
+ *    *    *
+
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=3;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if((i+j)%4==0 || (i==2 && j%4==0))
+                System.out.print("*");
+                else 
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Butterfly pattern:
+--------------------
+
+*        *
+**      **
+***    ***
+****  ****
+********** 
+**********
+****  ****
+***    ***
+**      **
+*        *
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("*");
+            }
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=n-i;j>=1;j--)
+            {
+                System.out.print(" ");
+            }
+            for(int j=i;j>=1;j--)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("*");
+            }
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=n-i;j>=1;j--)
+            {
+                System.out.print(" ");
+            }
+            for(int j=i;j>=1;j--)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Hollow butterfly pattern:
+-------------------------
+
+*        *
+**      **
+* *    * *
+*  *  *  *
+*   **   * 
+*   **   *
+*  *  *  *
+* *    * *
+**      **
+*        *
+
+import java.util.*;
+class Main 
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                if(i==1 || j==1 || i==j)
+                System.out.print("*");
+                else 
+                System.out.print(" ");
+            }
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=n-i;j>=1;j--)
+            {
+                System.out.print(" ");
+            }
+            for(int j=i;j>=1;j--)
+            {
+                if(i==1 || j==1 || i==j)
+                System.out.print("*");
+                else
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+        for(int i=n;i>=1;i--)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                if(i==1 || j==1 || i==j)
+                System.out.print("*");
+                else
+                System.out.print(" ");
+            }
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+            for(int j=n-i;j>=1;j--)
+            {
+                System.out.print(" ");
+            }
+            for(int j=i;j>=1;j--)
+            {
+                if(i==1 || j==1 || i==j)
+                System.out.print("*");
+                else
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
