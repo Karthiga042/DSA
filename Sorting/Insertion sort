@@ -1,26 +1,30 @@
-public class InsertionSortSimple {
-    public static void main(String[] args) {
-        int[] arr = {5, 2, 8, 1, 3};
+public class InsertionSort {
 
-        // Insertion Sort logic
-        for (int i = 1; i < arr.length; i++) {
-            int key = arr[i];       // Element to be inserted
+    public static void insertionSort(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
             int j = i - 1;
 
-            /* Move elements of arr[0..i-1], that are
-               greater than key, to one position ahead
-               of their current position */
+            // Shift elements greater than key
             while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];  // Shift element right
+                arr[j + 1] = arr[j];
                 j--;
             }
 
-            arr[j + 1] = key;       // Insert key at correct position
+            // Insert key at correct position
+            arr[j + 1] = key;
         }
+    }
 
-        // Print sorted array
-        for (int num : arr) {
+    public static void main(String[] args) {
+        int[] arr = {8, 3, 5, 2};
+
+        insertionSort(arr);
+
+        System.out.println("Sorted Array:");
+        for (int num : arr)
             System.out.print(num + " ");
-        }
     }
 }
