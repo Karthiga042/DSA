@@ -1,67 +1,77 @@
-public class RadixSort {
+public class RadixSortEasy {
 
-    // Main function to call radix sort
+    // -----------------------------
+    // MAIN RADIX SORT FUNCTION
+    // -----------------------------
     public static void radixSort(int[] arr) {
-        int max = getMax(arr); // Find the maximum number to know number of digits
 
-        // Apply counting sort for every digit
-        // exp = 1 (units), 10 (tens), 100 (hundreds), ...
-        // max/exp>0 You stop once all digit places are covered 821 3 digits run till 100s place
-        for (int exp = 1; max / exp > 0; exp *= 10) {
-            countingSortByDigit(arr, exp);
-        }
-    }
-
-    // Helper to get the maximum value in the array
-    private static int getMax(int[] arr) {
+        // Step 1: Find the maximum number
         int max = arr[0];
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] > max)
                 max = arr[i];
         }
-        return max;
+
+        // Step 2: Apply counting sort for each digit
+        // exp = 1 → units
+        // exp = 10 → tens
+        // exp = 100 → hundreds
+        for (int exp = 1; max / exp > 0; exp = exp * 10) {
+            countingSortByDigit(arr, exp);
+        }
     }
 
-    // Counting Sort based on digit represented by exp (1s, 10s, 100s place)
-    private static void countingSortByDigit(int[] arr, int exp) {
-        int n = arr.length;
-        int[] output = new int[n];     // Output array
-        int[] count = new int[10];     // Since digits range from 0 to 9
+    // ------------------------------------------------
+    // COUNTING SORT USED BY RADIX SORT (STEP BY STEP)
+    // ------------------------------------------------
+    public static void countingSortByDigit(int[] arr, int exp) {
 
-        // STEP 1: Store count of occurrences for current digit
+        int n = arr.length;
+
+        // Step 1: Create output array
+        int[] output = new int[n];
+
+        // Step 2: Create count array for digits (0 to 9)
+        int[] count = new int[10];
+
+        // Step 3: Count frequency of digits
         for (int i = 0; i < n; i++) {
-            int digit = (arr[i] / exp) % 10; // Get the digit at 'exp' place
+            int digit = (arr[i] / exp) % 10;
             count[digit]++;
         }
 
-        // STEP 2: Change count[i] to position of this digit in output[]
+        // Step 4: Convert count to cumulative count
         for (int i = 1; i < 10; i++) {
-            count[i] += count[i - 1];
+            count[i] = count[i] + count[i - 1];
         }
 
-        // STEP 3: Build the output array (stable sort, so go from right to left)
+        // Step 5: Place elements into output array (RIGHT to LEFT)
         for (int i = n - 1; i >= 0; i--) {
-            int digit = (arr[i] / exp) % 10;
-            output[count[digit] - 1] = arr[i];
-            count[digit]--;
+
+            int value = arr[i];                 // current number
+            int digit = (value / exp) % 10;     // current digit
+            int position = count[digit] - 1;    // correct position
+
+            output[position] = value;            // place value
+            count[digit]--;                      // decrease count
         }
 
-        // STEP 4: Copy the output array to arr[]
+        // Step 6: Copy output back to original array
         for (int i = 0; i < n; i++) {
             arr[i] = output[i];
         }
     }
 
-    // Main method to test
+    // -----------------------------
+    // MAIN METHOD
+    // -----------------------------
     public static void main(String[] args) {
+
         int[] arr = {170, 45, 75, 90, 802, 24, 2, 66};
 
-        radixSort(arr); // Call radix sort
+        radixSort(arr);
 
-        // Print sorted array
-        System.out.print("Sorted array: ");
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
+        for (int x : arr)
+            System.out.print(x + " ");
     }
 }
