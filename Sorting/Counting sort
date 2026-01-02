@@ -1,55 +1,105 @@
-public class StableCountingSort {
-    public static void countingSort(int[] arr) {
-        if (arr.length == 0) return;
+public class CountingSortDemo {
 
-        // Step 1: Find the maximum value
+    // -------------------------------
+    // BASIC COUNTING SORT (NOT STABLE)
+    // -------------------------------
+    // Idea:
+    // 1. Count frequency of each number
+    // 2. Directly write numbers back in order
+    // This version is easy but does NOT preserve order of duplicates
+
+    public static void basicCountingSort(int[] arr) {
+
         int max = arr[0];
         for (int i = 1; i < arr.length; i++) {
-            if (arr[i] > max) {
+            if (arr[i] > max)
                 max = arr[i];
-            }
         }
 
-        // Step 2: Create and fill frequency count array with size of max+1
         int[] count = new int[max + 1];
+
+        // Step 1: Count frequency
         for (int i = 0; i < arr.length; i++) {
             count[arr[i]]++;
         }
 
-        // Step 3: Modify count[] so that each element at each index
-        // stores the sum of previous counts — gives positions
-        //find prefix sum
-        for (int i = 1; i <= max; i++) {
-            count[i] += count[i - 1];
+        // Step 2: Rebuild array in sorted order
+        int index = 0;
+        for (int i = 0; i < count.length; i++) {
+            while (count[i] > 0) {
+                arr[index++] = i;
+                count[i]--;
+            }
+        }
+    }
+
+    // --------------------------------
+    // STABLE COUNTING SORT (CORRECT)
+    // --------------------------------
+    // Idea:
+    // 1. Count frequency
+    // 2. Convert count to cumulative count
+    // 3. Place elements using positions
+    // 4. Preserve order of duplicates
+
+    public static void stableCountingSort(int[] arr) {
+
+        int n = arr.length;
+
+        // Step 1: Find maximum element
+        int max = arr[0];
+        for (int i = 1; i < n; i++) {
+            if (arr[i] > max)
+                max = arr[i];
         }
 
-        // Step 4: Build the output array (same size as input)
-        // take last value as count[index] from input array
-        //find that count[index]'s value
-        //get value-1 as outputarray[index]
-        //place that last value of inputarray in outputarray[index]
-        //decrement freq count
-        int[] output = new int[arr.length];
-        for (int i = arr.length - 1; i >= 0; i--) {
+        // Step 2: Create count array
+        int[] count = new int[max + 1];
+
+        // Step 3: Store frequency
+        for (int i = 0; i < n; i++) {
+            count[arr[i]]++;
+        }
+
+        // Step 4: Convert to cumulative count
+        for (int i = 1; i <= max; i++) {
+            count[i] = count[i] + count[i - 1];
+        }
+
+        // Step 5: Create output array
+        int[] output = new int[n];
+
+        // Step 6: Place elements (right to left for stability)
+        for (int i = n - 1; i >= 0; i--) {
             int value = arr[i];
-            output[count[value] - 1] = value;
+            int position = count[value] - 1;
+            output[position] = value;
             count[value]--;
         }
 
-        // Step 5: Copy output back to original array
-        for (int i = 0; i < arr.length; i++) {
+        // Step 7: Copy output back to original array
+        for (int i = 0; i < n; i++) {
             arr[i] = output[i];
         }
     }
 
-    // Main method to test
+    // -------------------------------
+    // MAIN METHOD FOR TESTING
+    // -------------------------------
     public static void main(String[] args) {
-        int[] arr = {4, 2, 2, 8, 3, 3, 1};
-        countingSort(arr);
 
-        // Print sorted array
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
+        int[] arr1 = {4, 2, 2, 8, 3, 3, 1};
+        int[] arr2 = {4, 2, 2, 8, 3, 3, 1};
+
+        basicCountingSort(arr1);
+        stableCountingSort(arr2);
+
+        System.out.println("Basic Counting Sort:");
+        for (int x : arr1)
+            System.out.print(x + " ");
+
+        System.out.println("\n\nStable Counting Sort:");
+        for (int x : arr2)
+            System.out.print(x + " ");
     }
 }
