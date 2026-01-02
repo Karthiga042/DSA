@@ -45,7 +45,7 @@ public class HeapSort {
             arr[i] = arr[largest];
             arr[largest] = temp;
 
-            // Recursively heapify the affected subtree
+            // Recursively heapify the affected subtree bcoz parent and child node is swapped
             heapify(arr, n, largest);
         }
     }
