@@ -1,0 +1,14 @@
+int left = 0;
+int right = height.length - 1;
+
+while (left < right) {
+//min height bcoz Water cannot rise above the shorter wall
+    int area = Math.min(height[left], height[right]) * (right - left); //height*width
+    maxArea = Math.max(maxArea, area);
+
+    if (height[left] < height[right]) {
+        left++;
+    } else {
+        right--;
+    }
+}
