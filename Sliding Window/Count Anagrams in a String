@@ -1,0 +1,32 @@
+String text = "forxxorfxdofr";
+String pat = "for";
+
+int k = pat.length();
+int count = 0;
+
+int[] freqPat = new int[26];
+int[] freqWin = new int[26];
+
+// build pattern frequency
+for (char c : pat.toCharArray()) {
+    freqPat[c - 'a']++;
+}
+
+// first window
+for (int i = 0; i < k; i++) {
+    freqWin[text.charAt(i) - 'a']++;
+}
+
+if (Arrays.equals(freqPat, freqWin))
+    count++;
+
+// slide window
+for (int i = k; i < text.length(); i++) {
+    freqWin[text.charAt(i) - 'a']++;
+    freqWin[text.charAt(i - k) - 'a']--;
+
+    if (Arrays.equals(freqPat, freqWin))
+        count++;
+}
+
+System.out.println(count);
