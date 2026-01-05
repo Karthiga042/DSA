@@ -1,0 +1,21 @@
+int[] arr = {2, 1, 5, 2, 3, 2};
+int S = 7;
+
+int start = 0;
+int sum = 0;
+int minLen = Integer.MAX_VALUE;
+
+for (int end = 0; end < arr.length; end++) {
+    sum += arr[end];
+
+    while (sum >= S) {
+        minLen = Math.min(minLen, end - start + 1);
+        sum -= arr[start];
+        start++;
+    }
+}
+
+if (minLen == Integer.MAX_VALUE)
+    System.out.println("No subarray");
+else
+    System.out.println("Min Length = " + minLen);
